@@ -43,15 +43,15 @@ Talks
 
 Projects and Reports
 =====
-* [Exploring Diffusion Models with JAX]() - Python, JAX, TPU (June 2022) 
+* [Exploring Diffusion Models with JAX](https://www.kaggle.com/code/darshan1504/exploring-diffusion-models-with-jax) - Python, JAX, TPU (June 2022) 
   * Explores the mathematics and code of discrete diffusion models, their effectiveness, applicability, and limitations.
-* [Review Classification using Active Learning]() - Tensorflow, Keras, GPU (Oct. 2021) 
+* [Review Classification using Active Learning](https://keras.io/examples/nlp/active_learning_review_classification/) - Tensorflow, Keras, GPU (Oct. 2021) 
   * Demonstrates the effectiveness of active learning in text classification tasks by implementing a ratio-based sampling
     approach, improving performance and suitability for industrial applications.
-* [The Reality Behind the Optimization of Imaginary Variables - I and II]() - Research (Jun 2021 – Oct 2021)
+* [The Reality Behind the Optimization of Imaginary Variables - I and II](https://wandb.ai/darshandeshpande/complex-optimization/reports/The-Reality-Behind-Optimization-of-Imaginary-Variables-II--Vmlldzo5OTM5NTA) - Research (Jun 2021 – Oct 2021)
   * Leverages complex-valued neural networks to enhance representations by experimenting with traditional mappings and more efficient complex vector techniques.
   * Explores circularity and holomorphicity constraints in complex-valued neural networks, showcasing the effectiveness of linear and widely linear networks for image-denoising.
-* [MelGAN based Spectrogram Inversion using Feature Matching]() - Reproducibility (Sep. 2021)
+* [MelGAN based Spectrogram Inversion using Feature Matching](https://keras.io/examples/audio/melgan_spectrogram_inversion/) - Reproducibility (Sep. 2021)
   * Showcases a non-autoregressive model for spectral inversion utilizing a feature-matching discriminator, highlighting fast inference on dynamic inputs.
 
 Awards and Grants
