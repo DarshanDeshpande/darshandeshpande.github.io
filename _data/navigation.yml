@@ -1,0 +1,13 @@
+# main links links
+main:
+  - title: "Publications"
+    url: /publications/
+
+  - title: "Project and Reports"
+    url: /projects/
+
+  - title: "Talks"
+    url: /talks/     
+    
+  - title: "CV"
+    url: /cv/
