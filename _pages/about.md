@@ -16,5 +16,4 @@ Recent Updates
 =====
 
 * Currently looking for full time ML Engineering and Research positions in the NLP subspace
-* Got my first, first author paper accepted to NAACL with an average score of 4/5! 🥳
-*
+* Published three papers in the year 2023. Looking forward to another great year! 🥳
