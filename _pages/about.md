@@ -7,13 +7,13 @@ redirect_from:
   - /about.html
 ---
 
-I am a computer science graduate student at the University of Southern California. At the Information Sciences Institute, I actively work on argumentation, explainability and commonsense reasoning in language models. My interests are centered around dialogue systems, interpretibility of language models and low resource modeling.
-
+I am an NLP researcher working on improving argumentation, dialogue systems and inference of LLMs at the Information Sciences Institute. My interests are centered around improving commonsense reasoning and logical deduction capabilities of dialogue systems in low-resource (data and compute) settings.
 
 If any of my research seems interesting to you or you wish to collaborate then feel free to reach out to me!
 
 Recent Updates
 =====
 
-* Currently looking for full time ML Engineering and Research positions in the NLP subspace
+* Currently looking for full time <b>ML Engineering and Research positions in the NLP space</b>. Please reach out if you think my profile aligns with any potential openings!
+* Check out our new paper on <a href="https://arxiv.org/abs/2406.10764">Generating Negotiations through Open-Domain Mapping of Exchanges!</a> 💭🚀
 * Published three papers in the year 2023. Looking forward to another great year! 🥳

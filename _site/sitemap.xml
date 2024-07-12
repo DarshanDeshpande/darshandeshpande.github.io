@@ -16,6 +16,12 @@
 <loc>http://localhost:4000/projects/projects_5/</loc>
 </url>
 <url>
+<loc>http://localhost:4000/projects/projects_6/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/projects/projects_7/</loc>
+</url>
+<url>
 <loc>http://localhost:4000/publication/2023-04-22-robust-explainable-logical-fallacies</loc>
 <lastmod>2023-04-22T00:00:00-07:00</lastmod>
 </url>
@@ -25,6 +31,10 @@
 </url>
 <url>
 <loc>http://localhost:4000/publication/2023-05-20-argument-quality-spark</loc>
+<lastmod>2024-05-20T00:00:00-07:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/publication/2024-06-24-gnome</loc>
 <lastmod>2024-05-20T00:00:00-07:00</lastmod>
 </url>
 <url>

@@ -1,6 +1,7 @@
 ---
-title: <a href="https://wandb.ai/darshandeshpande/complex-optimization/reports/The-Reality-Behind-Optimization-of-Imaginary-Variables-II--Vmlldzo5OTM5NTA" style="color:#007091; filter:contrast(1.5)"> The Reality Behind the Optimization of Imaginary Variables - II, Weights & Biases
-excerpt: "Explores circularity and holomorphicity constraints in complex-valued neural networks, showcasing the
-effectiveness of linear and widely linear networks for image-denoising. (Oct 2021)"
+title: <a href="https://keras.io/examples/nlp/active_learning_review_classification/" style="color:#007091; filter:contrast(1.5)"> Review Classification using Active Learning, Keras.io
+excerpt: "Demonstrates the effectiveness of active learning in text classification tasks by implementing a ratio-
+based sampling approach, improving performance and suitability for industrial applications. (Oct 2021)"
 collection: projects
 ---
+
