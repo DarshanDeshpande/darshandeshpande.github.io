@@ -11,11 +11,15 @@ redirect_from:
 
 Education
 ======
-* M.S. in Computer Science, University of Southern California, 2024
+* M.S. in Computer Science, Patronus AI, 2024
 * B.S. in Computer Engineering, Mumbai University, 2022
 
 Work experience
 ======
+* August 2024 - Present: Research Engineer
+  * Patronus AI
+  * Duties include: Research on robust and automated LLM evaluations, and creation of agentic reasoning benchmarks
+
 * August 2022 - May 2024: Research Assistant
   * Information Sciences Institute
   * Duties include: Conducting novel research on argumentation, and logical and commonsense reasoning in dialogue systems and LLMs.
