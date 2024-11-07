@@ -12,5 +12,4 @@ I am an NLP researcher working on LLM evaluation and benchmarking at Patronus AI
 Recent Updates
 =====
 
-* Check out our recent paper on <a href="https://arxiv.org/abs/2406.10764">Generating Negotiations through Open-Domain Mapping of Exchanges!</a> 💭🚀
-* Published three papers in the year 2023. Looking forward to another great year! 🥳
+* Check out our recent EMNLP 2024 paper on <a href="https://arxiv.org/abs/2311.06647">Robust Text Classification: Analyzing Prototype-Based Networks</a> 💭🚀
