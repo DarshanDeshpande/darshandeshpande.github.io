@@ -11,7 +11,7 @@ redirect_from:
 
 Education
 ======
-* M.S. in Computer Science, Patronus AI, 2024
+* M.S. in Computer Science, University of Southern California, 2024
 * B.S. in Computer Engineering, Mumbai University, 2022
 
 Work experience
