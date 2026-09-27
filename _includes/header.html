@@ -1,0 +1,22 @@
+{%- comment -%} The top of the letter on the home page. {%- endcomment -%}
+{%- assign photo = site.static_files | where: "path", site.author.photo | first -%}
+<header class="letterhead">
+  <div class="lh-name">
+    <p class="lh-dev" lang="mr">दर्शन देशपांडे</p>
+    <h1 class="lh-en">{{ site.author.name }}</h1>
+    <p class="lh-role">{{ site.author.role }}, <a href="{{ site.author.affiliation_url }}">{{ site.author.affiliation }}</a></p>
+    <p class="lh-links">
+      {%- if site.author.email %}<span class="email">{{ site.author.email }}</span>{% endif %}
+      {%- for l in site.links %}<span class="dot" aria-hidden="true">·</span><a href="{{ l.url }}">{{ l.label }}</a>{% endfor %}
+    </p>
+  </div>
+  {%- if photo %}
+  <figure class="print print--portrait">
+    <img src="{{ site.author.photo | relative_url }}" alt="{{ site.author.name }}" width="480" height="480">
+  </figure>
+  {%- endif %}
+</header>
+<p class="lh-meta"><span>{{ site.author.location }}</span><span>ref. DD/{{ site.time | date: "%Y/%m" }}</span></p>
+{%- if site.data.about.re %}
+<p class="lh-re"><span class="label">Re:</span> {{ site.data.about.re }}</p>
+{%- endif %}

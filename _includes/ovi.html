@@ -1,0 +1,6 @@
+{%- comment -%} Bio as numbered ovi verses, from _data/about.yml. {%- endcomment -%}
+<section class="ovi" aria-label="About">
+  {%- for v in site.data.about.ovi %}
+  <p class="verse">{{ v | strip | newline_to_br }}<span class="mark" lang="mr">॥&nbsp;{% include devnum.html n=forloop.index %}&nbsp;॥</span></p>
+  {%- endfor %}
+</section>

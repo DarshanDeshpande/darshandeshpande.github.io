@@ -1,0 +1,5 @@
+<ul class="edu">
+  {%- for e in site.data.education %}
+  <li>{{ e.degree }}, {% if e.url %}<a href="{{ e.url }}">{{ e.institution }}</a>{% else %}{{ e.institution }}{% endif %}{% if e.years %}, {{ e.years }}{% endif %}{% if e.detail %}. <span class="faint">{{ e.detail }}.</span>{% endif %}</li>
+  {%- endfor %}
+</ul>

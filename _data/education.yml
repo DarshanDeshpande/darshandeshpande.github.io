@@ -1,0 +1,15 @@
+# ---------------------------------------------------------------
+# Education, newest first.
+#   degree, institution (required); url, years, detail (optional)
+# ---------------------------------------------------------------
+
+- degree: M.S. in Computer Science
+  institution: University of Southern California
+  url: https://www.usc.edu
+  years: "2022 – 2024"
+  detail: Research at the Information Sciences Institute
+
+- degree: B.E. in Computer Engineering
+  institution: Thadomal Shahani Engineering College, Mumbai
+  url: https://tsec.edu
+  years: "2018 – 2022"

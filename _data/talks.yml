@@ -1,0 +1,47 @@
+# ---------------------------------------------------------------
+# Talks and presentations, newest first (shown in this order).
+#
+# Fields:
+#   venue    (required)  where — event or host
+#   title               what you presented (leave out to show venue only)
+#   date                free text, e.g. "December 2025"
+#   kind                e.g. Invited talk, Poster, Panel, Workshop talk
+#   location            city or "Virtual"
+#   photo               path under /assets/img/talks/ (3:2 looks best)
+#   link                optional URL for slides, recording, or event page
+# ---------------------------------------------------------------
+
+- venue: "ML Suds and Sciences"
+  title: "Recursive Improvement Needs True Simulation Models"
+  date: "September 2026"
+  kind: Talk
+  location: San Francisco
+  photo: /assets/img/talks/ml-suds-and-sciences.jpg
+
+- venue: "Cornell RLRS × Patronus AI"
+  title: ""
+  date: "2026"
+  kind: Invited talk
+  location: Virtual
+  photo: /assets/img/talks/cornell-rlrs.jpg
+
+- venue: "NeurIPS 2025"
+  title: "MemTrack: Evaluating Long-Term Memory and State Tracking in Agent Environments"
+  date: "December 2025"
+  kind: Poster
+  location: San Diego
+  photo: /assets/img/talks/neurips-2025.jpg
+
+- venue: "Agentic AI Summit, UC Berkeley"
+  title: ""
+  date: "August 2025"
+  kind: Talk
+  location: Berkeley
+  photo: /assets/img/talks/berkeley-agentic-ai-summit.jpg
+
+- venue: "EMNLP 2024"
+  title: "Robust Text Classification: Analyzing Prototype-Based Networks"
+  date: "November 2024"
+  kind: Poster
+  location: Miami
+  photo: /assets/img/talks/emnlp-2024.jpg

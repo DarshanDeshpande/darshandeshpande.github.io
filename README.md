@@ -1,41 +1,82 @@
+# darshandeshpande.github.io
 
-# Academic Pages
+Personal site for Darshan Deshpande. Built with Jekyll, so GitHub Pages
+renders it directly from this repository — no build step, no Node, no CI.
 
-![pages-build-deployment](https://github.com/academicpages/academicpages.github.io/actions/workflows/pages/pages-build-deployment/badge.svg)
+## Publishing (once)
 
-Academic Pages is a Github Pages template for academic websites.
+1. Create a **public** repository on GitHub named exactly `darshandeshpande.github.io`.
+2. Push this folder to its `main` branch.
+3. In the repo, open **Settings → Pages** and set *Source* to
+   **Deploy from a branch**, branch `main`, folder `/ (root)`.
 
+The site appears at <https://darshandeshpande.github.io> within a minute or two.
+Every later `git push` republishes it.
 
-# Getting Started
+## Updating
 
-1. Register a GitHub account if you don't have one and confirm your e-mail (required!)
-1. Click the "Use this template" button in the top right.
-1. On the "New repository" page, enter your repository name as "[your GitHub username].github.io", which will also be your website's URL.
-1. Set site-wide configuration and add your content.
-1. Upload any files (like PDFs, .zip files, etc.) to the `files/` directory. They will appear at https://[your GitHub username].github.io/files/example.pdf.  
-1. Check status by going to the repository settings, in the "GitHub pages" section
-1. (Optional) Use the Jupyter notebooks or python scripts in the `markdown_generator` folder to generate markdown files for publications and talks from a TSV file.
+Everything you'd normally change is data, not markup:
 
-See more info at https://academicpages.github.io/
+| To change… | Edit |
+|---|---|
+| Your bio | `index.md` (plain Markdown) |
+| The "Re:" line under the date | `_data/about.yml` |
+| A paper (add, reorder, add links) | `_data/publications.yml`; add `selected: true` to list it on the letter |
+| A talk (put its photo in `assets/img/talks/`) | `_data/talks.yml` |
+| Education | `_data/education.yml` |
+| Role, city, email, profile links | `_config.yml` |
+| Tabs in the top bar | `nav:` in `_config.yml` (About is always first; CV appears once `assets/cv.pdf` exists) |
+| Hills named on the map | `landmarks:` in `_config.yml` |
+| Colors and fonts | tokens at the top of `assets/css/style.css` |
 
-## Running Locally
+### How the site is put together
 
-When you are initially working your website, it is very useful to be able to preview the changes locally before pushing them to GitHub. To work locally you will need to:
+Every page has a top bar with your name and the tabs (About,
+Publications, Talks, and CV once it exists). Behind everything is a
+contour map of San Francisco's hills that stays still while the page
+scrolls; the content sits on a sheet of paper lying on top of it. On wide
+screens the margins show Twin Peaks, Mt Davidson and Bernal Heights,
+labelled; on phones the map shows around the sheet's edges. On the first
+page of a visit the lines trace outward from the peaks once (never for
+people with reduced motion turned on). `assets/js/site.js` draws the map;
+the page reads fine without it.
 
-1. Clone the repository and made updates as detailed above.
-1. Make sure you have ruby-dev, bundler, and nodejs installed: `sudo apt install ruby-dev ruby-bundler nodejs`
-1. Run `bundle install` to install ruby dependencies. If you get errors, delete Gemfile.lock and try again.
-1. Run `jekyll serve -l -H localhost` to generate the HTML and serve it from `localhost:4000` the local server will automatically rebuild and refresh the pages on change.
+The home page is a short letter; Publications and Talks are
+"Enclosure A" and "Enclosure B".
 
+### Adding a paper
 
-# Maintenance 
+Append an entry to `_data/publications.yml`:
 
-Bug reports and feature requests to the template  should be [submitted via GitHub](https://github.com/academicpages/academicpages.github.io/issues/new/choose). For questions concerning how to style the template, please feel free to start a [new discussion on GitHub](https://github.com/academicpages/academicpages.github.io/discussions).
+```yaml
+- title: "Paper Title"
+  authors: "Darshan Deshpande, Coauthor One, Coauthor Two"
+  venue: "NeurIPS 2026"
+  year: 2026
+  arxiv: "2609.01234"          # any of these link fields are optional
+  code: https://github.com/…
+  selected: true               # also list it on the letter
+```
 
-This repository was forked (then detached) by [Stuart Geiger](https://github.com/staeiou) from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/), which is © 2016 Michael Rose and released under the MIT License (see LICENSE.md). It is currently being maintained by [Robert Zupko](https://github.com/rjzupkoii) and additional maintainers would be welcomed.
+Papers are grouped by year (newest first) and appear in the order listed
+within a year. Your name is underlined in author lists automatically.
 
-## Bugfixes and enhancements
+### Photo and CV
 
-If you have bugfixes and enhancements that you would like to submit as a pull request, you will need to [fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) this repository as opposed to using it as a template. This will also allow you to [synchronize your copy](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork) of template to your fork as well.
+- The clipped photo on the letter is `assets/img/photo.jpg`. Replace the
+  file to change it, delete it to remove the print.
+- Drop a PDF at `assets/cv.pdf` and a CV tab appears in the top bar.
 
-Unfortunately, one logistical issue with a template theme like Academic Pages that makes it a little tricky to get bug fixes and updates to the core theme. If you use this template and customize it, you will probably get merge conflicts if you attempt to synchronize. If you want to save your various .yml configuration files and markdown files, you can delete the repository and fork it again. Or you can manually patch.
+## Previewing locally (optional)
+
+You don't need this to publish, but if you want to see changes before pushing:
+
+```sh
+brew install ruby                       # once — macOS's built-in Ruby is too old
+echo 'export PATH="/opt/homebrew/opt/ruby/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc
+gem install bundler && bundle install   # once
+bundle exec jekyll serve --livereload   # then open http://localhost:4000
+```
+
+Local previews use Jekyll 4; GitHub Pages builds with its own Jekyll 3.9.
+The site uses only features common to both, so they render identically.

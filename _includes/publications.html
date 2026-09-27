@@ -1,0 +1,13 @@
+{%- comment -%} All papers from _data/publications.yml, grouped by year (newest first). {%- endcomment -%}
+{%- assign pubs = site.data.publications | sort: "year" | reverse -%}
+{%- assign years = pubs | map: "year" | uniq -%}
+<section class="block" id="publications">
+  {%- for y in years %}
+  <h3 class="yr">{{ y }}</h3>
+  <ol class="entries">
+    {%- for p in site.data.publications %}{% if p.year == y %}
+    {% include pub-entry.html p=p %}
+    {%- endif %}{% endfor %}
+  </ol>
+  {%- endfor %}
+</section>

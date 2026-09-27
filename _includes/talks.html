@@ -1,0 +1,26 @@
+{%- comment -%} Talks from _data/talks.yml, in the order listed. {%- endcomment -%}
+<section class="block" id="talks">
+  <ol class="talks">
+    {%- for t in site.data.talks %}
+    <li class="talk">
+      <div class="talk-text">
+        <p class="talk-venue">
+          {%- if t.link %}<a href="{{ t.link }}">{{ t.venue }}</a>{% else %}{{ t.venue }}{% endif %}
+        </p>
+        {%- if t.title and t.title.size > 0 %}<p class="talk-title">“{{ t.title }}”</p>{% endif %}
+        <p class="talk-meta">
+          {%- assign first = true -%}
+          {%- if t.kind and t.kind.size > 0 %}{{ t.kind }}{% assign first = false %}{% endif -%}
+          {%- if t.location and t.location.size > 0 %}{% unless first %} · {% endunless %}{{ t.location }}{% assign first = false %}{% endif -%}
+          {%- if t.date and t.date.size > 0 %}{% unless first %} · {% endunless %}{{ t.date }}{% endif -%}
+        </p>
+      </div>
+      {%- if t.photo %}
+      <figure class="print">
+        <img src="{{ t.photo | relative_url }}" alt="{{ t.venue }}{% if t.title and t.title.size > 0 %}: {{ t.title }}{% endif %}" loading="lazy" width="900" height="600">
+      </figure>
+      {%- endif %}
+    </li>
+    {%- endfor %}
+  </ol>
+</section>

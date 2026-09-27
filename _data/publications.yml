@@ -1,0 +1,104 @@
+# ---------------------------------------------------------------
+# Publications. One entry per paper. Order within a year is the
+# order shown on the page (years are sorted newest-first for you).
+#
+# Fields:
+#   title    (required)
+#   authors  (required)  comma-separated; your name is bolded automatically
+#   venue    (required)  short, human-readable
+#   year     (required)
+#   arxiv               arXiv id, e.g. 2505.08638  -> "arXiv" link
+#   pdf                 full URL                    -> "PDF" link
+#   doi                 DOI, e.g. 10.1016/...       -> "DOI" link
+#   code / data / model / blog / demo   full URLs   -> matching links
+#   note                one short line shown under the venue (optional)
+#   selected: true      also list it under "Selected work" on the home page
+# ---------------------------------------------------------------
+
+- title: "Masked Diffusion Language Models are Strong and Steerable Text-Based World Models for Agentic RL"
+  authors: "Darshan Deshpande"
+  venue: "NeurIPS 2026"
+  year: 2026
+  arxiv: "2607.16204"
+  code: https://github.com/patronus-ai/mdlm_world_modeling
+  data: https://huggingface.co/PatronusAI/world_model_corpus
+  selected: true
+
+- title: "FigmaTrace: Capturing Creative Nuances in Human Figma Design Workflows"
+  authors: "Darshan Deshpande, Yoshinari Fujinuma, Martyna Markiewicz, Devanshu Bansal, Shivani Jain, Nicholas Saban, Chirag Maheshwari, Anand Kannappan"
+  venue: "arXiv preprint"
+  year: 2026
+  arxiv: "2608.21460"
+  selected: true
+
+- title: "Benchmarking Reward Hack Detection in Code Environments via Contrastive Analysis"
+  authors: "Darshan Deshpande, Anand Kannappan, Rebecca Qian"
+  venue: "ICML 2026"
+  year: 2026
+  arxiv: "2601.20103"
+  selected: true
+
+- title: "DETOUR: An Interactive Benchmark for Dual-Agent Search and Reasoning"
+  authors: "Siyan Li, Darshan Deshpande, Anand Kannappan, Rebecca Qian"
+  venue: "GEM Workshop, ACL 2026"
+  year: 2026
+  arxiv: "2602.00352"
+
+- title: "MemTrack: Evaluating Long-Term Memory and State Tracking in Multi-Platform Dynamic Agent Environments"
+  authors: "Darshan Deshpande, Varun Gangal, Hersh Mehta, Anand Kannappan, Rebecca Qian, Peter Wang"
+  venue: "Scaling Environments for Agents Workshop, NeurIPS 2025"
+  year: 2025
+  arxiv: "2510.01353"
+  blog: https://www.patronus.ai/blog/memtrack
+  selected: true
+
+- title: "TRAIL: Trace Reasoning and Agentic Issue Localization"
+  authors: "Darshan Deshpande, Varun Gangal, Hersh Mehta, Jitin Krishnan, Anand Kannappan, Rebecca Qian"
+  venue: "arXiv preprint"
+  year: 2025
+  arxiv: "2505.08638"
+  code: https://github.com/patronus-ai/trail-benchmark
+  data: https://huggingface.co/datasets/PatronusAI/TRAIL
+  blog: https://www.patronus.ai/blog/introducing-trail-a-benchmark-for-agentic-evaluation
+  selected: true
+
+- title: "Browsing Lost Unformed Recollections: A Benchmark for Tip-of-the-Tongue Search and Reasoning"
+  authors: "Sky CH-Wang, Darshan Deshpande, Smaranda Muresan, Anand Kannappan, Rebecca Qian"
+  venue: "ACL 2025"
+  year: 2025
+  arxiv: "2503.19193"
+  pdf: https://aclanthology.org/2025.acl-long.406.pdf
+
+- title: "GLIDER: Grading LLM Interactions and Decisions using Explainable Ranking"
+  authors: "Darshan Deshpande, Selvan Sunitha Ravi, Sky CH-Wang, Bartosz Mielczarek, Anand Kannappan, Rebecca Qian"
+  venue: "arXiv preprint"
+  year: 2024
+  arxiv: "2412.14140"
+  model: https://huggingface.co/PatronusAI/glider
+
+- title: "Robust Text Classification: Analyzing Prototype-Based Networks"
+  authors: "Zhivar Sourati, Darshan Deshpande, Filip Ilievski, Kiril Gashteovski, Sascha Saralajew"
+  venue: "Findings of EMNLP 2024"
+  year: 2024
+  arxiv: "2311.06647"
+  pdf: https://aclanthology.org/2024.findings-emnlp.745.pdf
+
+- title: "GNOME: Generating Negotiations through Open-Domain Mapping of Exchanges"
+  authors: "Darshan Deshpande, Shambhavi Sinha, Anirudh Ravi Kumar, Debaditya Pal, Jonathan May"
+  venue: "arXiv preprint"
+  year: 2024
+  arxiv: "2406.10764"
+
+- title: "Contextualizing Argument Quality Assessment with Relevant Knowledge"
+  authors: "Darshan Deshpande, Zhivar Sourati, Filip Ilievski, Fred Morstatter"
+  venue: "NAACL 2024"
+  year: 2024
+  arxiv: "2305.12280"
+  pdf: https://aclanthology.org/2024.naacl-short.28.pdf
+
+- title: "Robust and Explainable Identification of Logical Fallacies in Natural Language Arguments"
+  authors: "Zhivar Sourati, Vishnu Priya Prasanna Venkatesh, Darshan Deshpande, Himanshu Rawlani, Filip Ilievski, Hông-Ân Sandlin, Alain Mermoud"
+  venue: "Knowledge-Based Systems, vol. 266"
+  year: 2023
+  arxiv: "2212.07425"
+  doi: "10.1016/j.knosys.2023.110418"

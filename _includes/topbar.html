@@ -1,0 +1,19 @@
+{%- comment -%} The bar at the top of every page: your name and the tabs. {%- endcomment -%}
+{%- assign cv = site.static_files | where: "path", site.author.cv | first -%}
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="{{ '/' | relative_url }}">{{ site.author.name }}</a>
+    <nav class="tabs" aria-label="Main">
+      <ul>
+        <li><a href="{{ '/' | relative_url }}"{% if page.url == "/" %} aria-current="page"{% endif %}>About</a></li>
+        {%- for n in site.nav %}
+        <li><a href="{{ n.url | relative_url }}"{% if page.url == n.url %} aria-current="page"{% endif %}>{{ n.label }}</a></li>
+        {%- endfor %}
+        {%- if cv %}
+        <li><a href="{{ site.author.cv | relative_url }}">CV</a></li>
+        {%- endif %}
+      </ul>
+    </nav>
+  </div>
+</header>

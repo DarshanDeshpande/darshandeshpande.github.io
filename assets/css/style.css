@@ -1,0 +1,347 @@
+/* ------------------------------------------------------------------
+   Darshan Deshpande: a letter lying on a map of San Francisco's hills.
+   One light theme. Text in Newsreader, small labels in IBM Plex Mono.
+   All colors are tokens on :root; change them there.
+   ------------------------------------------------------------------ */
+
+:root {
+  --ground: #F1F0EA;           /* the map the letter lies on */
+  --paper: #FFFEFB;            /* the letter */
+  --ink: #1F1E1C;
+  --ink-soft: #55534E;
+  --faint: #8C8A83;
+  --accent: #B3261E;           /* the red of a typewriter ribbon, used sparingly */
+  --rule: #E2DFD7;
+  --contour: #D3D7CB;          /* thin contour lines */
+  --contour-index: #AFB7AA;    /* every fourth, a little heavier */
+  --shadow: rgba(40, 32, 20, .14);
+
+  --serif: "Newsreader", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --dev: "Tiro Devanagari Marathi", "Kohinoor Devanagari", "Devanagari Sangam MN", "Noto Serif Devanagari", serif;
+  --measure: 40rem;            /* text width */
+  --sheet-pad: 3rem;           /* margin inside the letter */
+  --gutter: 1.25rem;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background-color: var(--ground);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+p { margin: 0; }
+strong { font-weight: 500; }
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+  text-decoration-color: var(--rule);
+  transition: color .12s ease, text-decoration-color .12s ease;
+}
+a:hover { color: var(--accent); text-decoration-color: currentColor; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Small mono labels */
+.label, .eyebrow, h2, .yr, .lh-meta, .entry-meta .links, .talk-meta, .terrain-cap, .north, .landmark, .tabs, .encl, .sign-links, .footer {
+  font-family: var(--mono);
+}
+
+/* ---------- The map behind the page ---------- */
+
+.terrain {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.terrain-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.landmark {
+  position: absolute;
+  left: calc(var(--x) * 100%);
+  top: calc(var(--y) * 100%);
+  display: none;                  /* shown only when there are margins, below */
+  flex-direction: column;
+  padding: 0 .35rem .1rem .85rem;
+  transform: translateY(-.55rem);
+  font-size: .64rem;
+  line-height: 1.35;
+  color: var(--faint);
+  background: rgba(241, 240, 234, .85);
+  border-radius: 2px;
+  white-space: nowrap;
+}
+.landmark b { font-weight: 500; font-size: .7rem; color: var(--ink-soft); }
+.landmark::before {               /* summit marker, at the exact point */
+  content: "";
+  position: absolute;
+  left: -.24rem;
+  top: .3rem;
+  border-left: .24rem solid transparent;
+  border-right: .24rem solid transparent;
+  border-bottom: .4rem solid var(--faint);
+}
+.landmark--left {
+  transform: translate(-100%, -.55rem);
+  padding: 0 .85rem .1rem .35rem;
+  text-align: right;
+}
+.landmark--left::before { left: auto; right: -.24rem; }
+.terrain-cap {
+  position: absolute;
+  left: var(--gutter);
+  bottom: 1rem;
+  display: none;
+  font-size: .64rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.north {
+  position: absolute;
+  right: var(--gutter);
+  top: 4.4rem;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  font-size: .62rem;
+  color: var(--faint);
+  line-height: 1;
+  gap: .1rem;
+}
+@media (min-width: 75rem) {        /* wide enough for margins beside the letter */
+  .landmark, .north { display: flex; }
+  .terrain-cap { display: block; }
+}
+
+/* ---------- Top bar and tabs ---------- */
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: .5rem;
+  z-index: 20;
+  background: var(--ink);
+  color: var(--paper);
+  padding: .4rem .8rem;
+  font-family: var(--mono);
+  font-size: .8rem;
+}
+.skip:focus { left: var(--gutter); }
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(241, 240, 234, .9);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s ease;
+}
+.topbar.is-stuck { border-bottom-color: var(--rule); }
+.topbar-in {
+  max-width: calc(var(--measure) + 2 * var(--sheet-pad));
+  margin: 0 auto;
+  padding-inline: var(--sheet-pad);
+  height: 3.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.brand { font-weight: 500; font-size: 1.05rem; text-decoration: none; white-space: nowrap; }
+.brand:hover { color: var(--ink); }
+.tabs ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.5rem; }
+.tabs a {
+  display: inline-block;
+  padding: .35rem 0 .3rem;
+  font-size: .8rem;
+  letter-spacing: .03em;
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-bottom: 1.5px solid transparent;
+}
+.tabs a:hover { color: var(--ink); border-bottom-color: var(--rule); }
+.tabs a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--accent); }
+main:focus { outline: none; }
+
+/* ---------- The sheet ---------- */
+
+.sheet {                           /* the letter, lying on the map */
+  position: relative;
+  z-index: 1;
+  width: min(calc(100% - 1.5rem), calc(var(--measure) + 2 * var(--sheet-pad)));
+  margin: .75rem auto 3rem;
+  padding: 2.6rem var(--sheet-pad) 1.5rem;
+  background: var(--paper);
+  border: 1px solid rgba(60, 50, 30, .07);
+  box-shadow: 0 1px 2px rgba(40, 32, 20, .05), 0 16px 40px rgba(40, 32, 20, .07);
+}
+
+/* Letterhead text */
+.letterhead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+.lh-dev {
+  font-family: var(--dev);
+  color: var(--accent);
+  font-size: 1rem;
+  line-height: 1.3;
+  opacity: .85;
+}
+.lh-en {
+  margin: .1rem 0 .25rem;
+  font-size: 2.4rem;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -.01em;
+}
+.lh-role { color: var(--ink-soft); font-style: italic; }
+.lh-links {
+  margin-top: .7rem;
+  font-family: var(--mono);
+  font-size: .75rem;
+  line-height: 1.9;
+  color: var(--faint);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+.lh-links a { color: var(--ink-soft); text-decoration-color: var(--rule); white-space: nowrap; }
+.lh-links a:hover { color: var(--accent); text-decoration-color: currentColor; }
+.lh-links .dot { margin: 0 .55rem; }
+.lh-links .email { color: var(--ink-soft); flex-basis: 100%; }   /* email on its own line */
+.lh-links .email + .dot { display: none; }
+.lh-meta {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0 1.5rem;
+  margin-top: 1.5rem;
+  padding-top: .55rem;
+  border-top: 1px solid var(--ink);
+  font-size: .75rem;
+  color: var(--faint);
+}
+.lh-re { margin-top: 1.1rem; color: var(--ink-soft); }
+.label { font-size: .75rem; color: var(--accent); margin-right: .25rem; }
+
+/* Photographic prints on the letter */
+.print {
+  margin: 0;
+  flex: 0 0 auto;
+  background: #FFFFFF;
+  padding: .35rem .35rem .85rem;
+  box-shadow: 0 1px 2px var(--shadow), 0 6px 14px var(--shadow);
+  position: relative;
+}
+.print img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; }
+.print--portrait { width: 6.25rem; transform: rotate(1.5deg); margin-top: .2rem; }
+.print--portrait img { aspect-ratio: 1; }
+/* Bio */
+.bio { margin-top: 1.9rem; display: grid; gap: 1rem; }
+
+/* Sections */
+.block { margin-top: 2.8rem; }
+h2 {
+  margin: 0 0 1.1rem;
+  font-size: .75rem;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.block > p + p, .block > p + ul { margin-top: 1rem; }
+
+/* Entries (papers) */
+.entries { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.2rem; }
+.entry > p + p { margin-top: .15rem; }
+.entry-title { font-weight: 500; line-height: 1.4; }
+.entry-title a { text-decoration: none; }
+.entry-title a:hover { text-decoration: underline; }
+.entry-authors { color: var(--ink-soft); font-size: .92rem; }
+.entry-authors .me { color: var(--ink); text-decoration: underline; text-decoration-color: var(--faint); text-decoration-thickness: 1px; text-underline-offset: .18em; }
+.entry-meta { font-size: .92rem; color: var(--ink-soft); display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 .75rem; }
+.entry-meta .venue { font-style: italic; }
+.entry-meta .links { font-size: .72rem; display: inline-flex; gap: .7rem; }
+.entry-meta .links a { text-decoration: none; color: var(--faint); }
+.entry-meta .links a:hover { color: var(--accent); }
+.entry-note { font-size: .92rem; color: var(--ink-soft); margin-top: .25rem; }
+.yr {
+  margin: 2.2rem 0 .9rem;
+  font-size: .75rem;
+  font-weight: 400;
+  color: var(--faint);
+  letter-spacing: .1em;
+}
+.yr:first-child { margin-top: 0; }
+
+/* Education */
+.edu { list-style: none; margin: 1.1rem 0 0; padding: 0; display: grid; gap: .3rem; font-size: .95rem; color: var(--ink-soft); }
+.faint { color: var(--faint); }
+
+/* Talks */
+.talks { list-style: none; margin: 0; padding: 0; display: grid; gap: 2rem; }
+.talk { display: grid; grid-template-columns: minmax(0, 1fr) 11rem; gap: 1.5rem; align-items: start; }
+.talk-venue { font-weight: 500; }
+.talk-title { margin-top: .1rem; font-style: italic; color: var(--ink-soft); }
+.talk-meta { margin-top: .3rem; font-size: .72rem; color: var(--faint); }
+.talk .print { transform: rotate(-1deg); }
+.talk:nth-child(even) .print { transform: rotate(1.2deg); }
+
+/* Enclosure pages */
+.eyebrow { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+.encl-title { margin: .2rem 0 2rem; font-size: 2rem; font-weight: 500; line-height: 1.15; letter-spacing: -.01em; }
+
+/* Encl. line and sign-off */
+.encl { margin-top: 2.8rem; font-size: .8rem; color: var(--ink-soft); }
+.encl a { white-space: nowrap; }
+.encl a[aria-current="page"] { text-decoration: none; color: var(--faint); }
+.encl .red { color: var(--accent); }
+.sign { margin-top: 2.2rem; display: grid; gap: .15rem; }
+.sign-name { font-style: italic; font-size: 1.2rem; }
+.sign-links { margin-top: .7rem; font-size: .75rem; color: var(--faint); }
+.sign-links a { color: var(--ink-soft); }
+.sign-links .email { user-select: all; color: var(--ink-soft); }
+
+/* Footer */
+.footer { margin-top: 3rem; }
+.footer p { font-size: .68rem; color: var(--faint); border-top: 1px solid var(--rule); padding-top: .9rem; letter-spacing: .02em; }
+
+/* ---------- Small screens ---------- */
+@media (max-width: 36rem) {
+  body { font-size: 17px; }
+  :root { --sheet-pad: 1.25rem; }
+  .sheet { width: calc(100% - 1.2rem); margin: .5rem auto 2rem; padding-top: 1.75rem; }
+  .brand { display: none; }
+  .tabs { width: 100%; }
+  .tabs ul { justify-content: space-between; gap: .5rem; }
+  .lh-en { font-size: 2rem; }
+  .lh-links { column-gap: 1.1rem; line-height: 2; }
+  .lh-links .dot { display: none; }
+  .print--portrait { width: 5rem; }
+  .talk { grid-template-columns: 1fr; gap: .8rem; }
+  .talk .print { width: 70%; max-width: 16rem; }
+}
+
+@media print {
+  .terrain, .topbar, .skip { display: none; }
+  .sheet { box-shadow: none; border: 0; }
+  body { background: #fff; color: #000; }
+  a { text-decoration: none; }
+}

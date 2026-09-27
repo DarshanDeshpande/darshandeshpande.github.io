@@ -1,0 +1,12 @@
+{%- comment -%} Papers marked `selected: true` in _data/publications.yml. {%- endcomment -%}
+{%- assign picks = site.data.publications | where: "selected", true -%}
+{%- if picks.size > 0 %}
+<section class="block" id="selected">
+  <h2>Selected Recent Work</h2>
+  <ol class="entries">
+    {%- for p in picks %}
+    {% include pub-entry.html p=p short=true %}
+    {%- endfor %}
+  </ol>
+</section>
+{%- endif %}

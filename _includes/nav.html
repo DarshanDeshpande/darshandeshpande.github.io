@@ -1,0 +1,11 @@
+{%- comment -%} The "Encl." line: every page in site.nav, plus the CV once it exists. {%- endcomment -%}
+{%- assign cv = site.static_files | where: "path", site.author.cv | first -%}
+<p class="encl"><span class="red">Encl.:</span>
+  {%- for n in site.nav %}
+  {%- if n.label == "Publications" %}{% assign count = site.data.publications.size %}{% elsif n.label == "Talks" %}{% assign count = site.data.talks.size %}{% else %}{% assign count = nil %}{% endif %}
+  <a href="{{ n.url | relative_url }}"{% if page.url == n.url %} aria-current="page"{% endif %}>{{ n.encl }}. {{ n.label }}{% if count %} ({{ count }}){% endif %}</a>{% unless forloop.last and cv == nil %} ·{% endunless %}
+  {%- endfor %}
+  {%- if cv %}
+  <a href="{{ site.author.cv | relative_url }}">C. CV</a>
+  {%- endif %}
+</p>
