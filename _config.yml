@@ -37,6 +37,9 @@ nav:
   - label: Talks
     url: /talks/
     encl: B
+  - label: Tangents
+    url: /tangents/
+    encl: C
 
 # Hills labelled on the contour map behind the page. Positions are
 # fractions of the browser window (0 to 1), north up; keep them in the

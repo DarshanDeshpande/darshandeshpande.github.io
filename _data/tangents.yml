@@ -1,0 +1,28 @@
+# ---------------------------------------------------------------
+# Tangents: handwritten notebooks, newest first.
+#
+# To add one, export the notes as a PDF and run
+#   python3 _tools/tangents_pdf_to_svg.py "<the pdf>" assets/tangents/notebook-N
+# It cuts the pages into one slip per numbered idea and prints the
+# `slips:` line for the entry below.
+#
+# Only images of your handwriting go on the page: there is deliberately
+# no typed transcript, so scrapers and agents reading the page's text
+# don't get the ideas.
+#
+# Fields:
+#   title    (required)  e.g. "Notebook II"
+#   key      (required)  short label used in links and email subjects:
+#                        tangent 5 of key "I" lives at /tangents/#I-5
+#   folder   (required)  where the SVGs are
+#   date                 free text, e.g. "October 2026"
+#   pages                how many original pages (page-1.svg ...)
+#   slips    (required)  height of each tangent-N.svg in points, in order
+# ---------------------------------------------------------------
+
+- title: "Notebook I"
+  key: "I"
+  folder: /assets/tangents/notebook-1
+  date: "October 2026"
+  pages: 3
+  slips: [245, 245, 228, 193, 175, 158, 175, 123, 140, 140]

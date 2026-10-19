@@ -24,6 +24,7 @@ Everything you'd normally change is data, not markup:
 | A paper (add, reorder, add links) | `_data/publications.yml`; add `selected: true` to list it on the letter |
 | A talk (put its photo in `assets/img/talks/`) | `_data/talks.yml` |
 | Education | `_data/education.yml` |
+| Tangents (handwritten idea notebooks) | export the notes as a PDF, run `python3 _tools/tangents_pdf_to_svg.py "<pdf>" assets/tangents/notebook-N` (cuts it into one slip per numbered idea), then add the lines it prints to `_data/tangents.yml`. No typed text of the ideas goes on the page, and `robots.txt` asks AI crawlers to stay out of `/tangents/`. |
 | Role, city, email, profile links | `_config.yml` |
 | Tabs in the top bar | `nav:` in `_config.yml` (About is always first; CV appears once `assets/cv.pdf` exists) |
 | Hills named on the map | `landmarks:` in `_config.yml` |

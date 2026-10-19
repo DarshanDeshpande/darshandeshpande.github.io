@@ -1,0 +1,37 @@
+{%- comment -%}
+  Handwritten notebooks from _data/tangents.yml, newest first. Each numbered
+  idea is its own slip of notepaper with a link of its own (/tangents/#I-5)
+  and a "write to me about this" that opens an email about that tangent.
+  Tapping a slip opens it full size (it's a vector, so it stays sharp).
+{%- endcomment -%}
+{%- for nb in site.data.tangents %}
+<section class="block notebook" id="notebook-{{ nb.key }}">
+  <h2>{{ nb.title }}</h2>
+  <p class="notebook-meta">
+    {%- if nb.date %}{{ nb.date }} · {% endif %}{{ nb.slips.size }} tangents
+    {%- if nb.pages %} · original pages
+      {%- for i in (1..nb.pages) %} <a href="{{ nb.folder | append: '/page-' | append: i | append: '.svg' | relative_url }}">{{ i }}</a>{% endfor %}
+    {%- endif %}
+  </p>
+  <p class="tap-hint">Tap a slip to read it larger.</p>
+  <ol class="slips">
+    {%- for h in nb.slips %}
+    {%- assign n = forloop.index %}
+    {%- assign src = nb.folder | append: '/tangent-' | append: n | append: '.svg' | relative_url %}
+    <li class="slip" id="{{ nb.key }}-{{ n }}">
+      <a class="slip-paper" href="{{ src }}" title="Open tangent {{ nb.key }}.{{ n }} full size">
+        <img src="{{ src }}" alt="Tangent {{ n }} from {{ nb.title }}, handwritten." width="455" height="{{ h }}" {% if n > 2 %}loading="lazy" {% endif %}decoding="async">
+      </a>
+      <p class="slip-meta">
+        <a class="slip-no" href="#{{ nb.key }}-{{ n }}" aria-label="Link to tangent {{ nb.key }}.{{ n }}">{{ nb.key }}.{{ n }}</a>
+        <a class="slip-write" href="#write" data-subject="Tangent {{ nb.key }}.{{ n }}">Write to me about this</a>
+      </p>
+    </li>
+    {%- endfor %}
+  </ol>
+</section>
+{%- endfor %}
+
+{%- if site.author.email %}
+<p class="tangents-write" id="write"><span class="label">Write:</span> <span class="email" data-email="{{ site.author.email }}">{{ site.author.email }}</span></p>
+{%- endif %}

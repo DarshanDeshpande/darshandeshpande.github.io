@@ -4,6 +4,9 @@
       On the first page of a visit the lines trace outward from the peaks
       once (about 1.4s), then stay still.
    2. Gives the top bar a hairline once the page scrolls.
+   3. Turns "Write to me about this" on Tangents into an email about that
+      tangent. The address is only assembled on click, so it never appears
+      in the page in a form scrapers can read.
    Nothing here is required to read the page.
    ------------------------------------------------------------------ */
 (function () {
@@ -166,6 +169,16 @@
       var onScroll = function () { bar.classList.toggle("is-stuck", window.scrollY > 4); };
       window.addEventListener("scroll", onScroll, { passive: true });
       onScroll();
+    }
+
+    var email = document.querySelector("[data-email]");
+    if (email) {
+      document.addEventListener("click", function (e) {
+        var a = e.target.closest && e.target.closest("a[data-subject]");
+        if (!a) return;
+        var addr = email.dataset.email.replace(/\s*\[dot\]\s*/g, ".").replace(/\s*\[at\]\s*/g, "@");
+        a.href = "mailto:" + addr + "?subject=" + encodeURIComponent(a.dataset.subject);
+      });
     }
   }
 

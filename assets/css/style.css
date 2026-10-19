@@ -42,6 +42,7 @@ body {
 
 p { margin: 0; }
 strong { font-weight: 500; }
+b { font-weight: 600; }            /* a real weight of Newsreader, not a browser-faked bold */
 
 a {
   color: inherit;
@@ -308,6 +309,53 @@ h2 {
 .eyebrow { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
 .encl-title { margin: .2rem 0 2rem; font-size: 2rem; font-weight: 500; line-height: 1.15; letter-spacing: -.01em; }
 
+.encl-title.has-sub { margin-bottom: .35rem; }
+.encl-sub { margin-bottom: 2rem; font-style: italic; color: var(--ink-soft); }
+
+/* Tangents: each idea a slip of handwritten notepaper, enclosed with the letter */
+.tangents-intro { display: grid; gap: 1rem; }
+.notebook h2 { margin-bottom: .2rem; }
+.notebook-meta { font-family: var(--mono); font-size: .72rem; color: var(--faint); }
+.notebook-meta a { color: var(--ink-soft); }
+.tap-hint { display: none; margin-top: .3rem; font-family: var(--mono); font-size: .72rem; color: var(--faint); }
+.slips {
+  list-style: none;
+  padding: 0;
+  margin: 1.6rem calc(-1 * var(--sheet-pad) + 1rem) 0;   /* a little wider than the text, as loose slips would be */
+  display: grid;
+  gap: 2rem;
+}
+.slip { scroll-margin-top: 4.5rem; }                     /* clear the sticky top bar when linked to */
+.slip-paper {
+  display: block;
+  cursor: zoom-in;
+  box-shadow: 0 1px 2px var(--shadow), 0 6px 16px rgba(40, 32, 20, .09);
+  transform: rotate(-.45deg);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.slip:nth-child(even) .slip-paper { transform: rotate(.4deg); }
+.slip:nth-child(3n) .slip-paper { transform: rotate(-.2deg); }
+.slip-paper:hover, .slip:target .slip-paper { transform: rotate(0); box-shadow: 0 1px 2px var(--shadow), 0 12px 28px rgba(40, 32, 20, .13); }
+.slip-paper:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.slip-paper img { display: block; width: 100%; height: auto; background: var(--paper); }
+.slip-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: .55rem;
+  padding-inline: .15rem;
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .03em;
+  color: var(--faint);
+}
+.slip-meta a { color: var(--faint); text-decoration: none; }
+.slip-meta a:hover { color: var(--accent); }
+.slip:target .slip-no { color: var(--accent); }
+.tangents-write { margin-top: 2.8rem; color: var(--ink-soft); scroll-margin-top: 4.5rem; }
+.tangents-write .email { font-family: var(--mono); font-size: .8rem; }
+@media (prefers-reduced-motion: reduce) { .slip-paper { transition: none; } }
+
 /* Encl. line and sign-off */
 .encl { margin-top: 2.8rem; font-size: .8rem; color: var(--ink-soft); }
 .encl a { white-space: nowrap; }
@@ -337,7 +385,11 @@ h2 {
   .print--portrait { width: 5rem; }
   .talk { grid-template-columns: 1fr; gap: .8rem; }
   .talk .print { width: 70%; max-width: 16rem; }
+  .slips { margin-inline: calc(-1 * var(--sheet-pad) + .35rem); gap: 1.6rem; }
+  .slip .slip-paper { transform: rotate(-.25deg); }
+  .slip:nth-child(even) .slip-paper { transform: rotate(.25deg); }
 }
+@media (hover: none) and (max-width: 36rem) { .tap-hint { display: block; } }
 
 @media print {
   .terrain, .topbar, .skip { display: none; }
