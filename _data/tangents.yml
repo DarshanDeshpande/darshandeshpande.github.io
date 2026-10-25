@@ -15,7 +15,8 @@
 #   key      (required)  short label used in links and email subjects:
 #                        tangent 5 of key "I" lives at /tangents/#I-5
 #   folder   (required)  where the SVGs are
-#   date                 free text, e.g. "October 2026"
+#   date                 free text, e.g. "October 2026"; also gives the
+#                        year and month in each "Cite this idea" BibTeX
 #   pages                how many original pages (page-1.svg ...)
 #   slips    (required)  height of each tangent-N.svg in points, in order
 # ---------------------------------------------------------------

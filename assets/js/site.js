@@ -7,6 +7,8 @@
    3. Turns "Write to me about this" on Tangents into an email about that
       tangent. The address is only assembled on click, so it never appears
       in the page in a form scrapers can read.
+   4. Turns "Cite this idea" on Tangents into a BibTeX entry for that
+      tangent, shown under its slip and copied to the clipboard.
    Nothing here is required to read the page.
    ------------------------------------------------------------------ */
 (function () {
@@ -180,6 +182,81 @@
         a.href = "mailto:" + addr + "?subject=" + encodeURIComponent(a.dataset.subject);
       });
     }
+
+    var cites = document.querySelectorAll(".slip-cite");
+    if (cites.length) {
+      cites.forEach(function (b) { b.hidden = false; });
+      document.addEventListener("click", function (e) {
+        var b = e.target.closest && e.target.closest(".slip-cite");
+        if (b) toggleCite(b);
+        var c = e.target.closest && e.target.closest(".slip-copy");
+        if (c) copyCite(c);
+      });
+    }
+  }
+
+  // A @misc entry for one tangent. The year and month come from the
+  // notebook's date ("October 2026"); the title is its number, since the
+  // ideas themselves are only ever handwritten.
+  function bibtex(b) {
+    var nb = b.closest(".slips").dataset;
+    var author = nb.citeAuthor || "";
+    var d = /(?:([A-Za-z]{3})[A-Za-z]*\.?\s+)?(\d{4})/.exec(nb.citeDate || "");
+    var year = d ? d[2] : "";
+    var month = d && d[1] ? d[1].toLowerCase() : "";
+    if ("jan feb mar apr may jun jul aug sep oct nov dec".indexOf(month) < 0) month = "";
+    var key = (author.split(" ").pop() || "tangent").toLowerCase().replace(/[^a-z]/g, "") +
+      year + "tangent-" + b.dataset.citeId;
+    var fields = [
+      ["author", "{" + author + "}"],
+      ["title", "{Tangent {" + b.dataset.citeLabel + "}}"],
+      ["howpublished", "{\\url{" + b.dataset.citeUrl + "}}"],
+      ["note", "{Handwritten research idea" + (nb.citeNotebook ? ", " + nb.citeNotebook : "") + "}"],
+      ["year", year && "{" + year + "}"],
+      ["month", month]
+    ].filter(function (f) { return f[1]; });
+    return "@misc{" + key + ",\n" + fields.map(function (f) {
+      return "  " + (f[0] + "            ").slice(0, 12) + " = " + f[1];
+    }).join(",\n") + "\n}";
+  }
+
+  function toggleCite(b) {
+    var box = document.getElementById(b.getAttribute("aria-controls"));
+    if (!box) return;
+    var open = b.getAttribute("aria-expanded") !== "true";
+    b.setAttribute("aria-expanded", String(open));
+    box.hidden = !open;
+    if (!open) return;
+    if (!box.firstChild) {
+      var pre = document.createElement("pre");
+      pre.textContent = bibtex(b);
+      var copy = document.createElement("button");
+      copy.type = "button";
+      copy.className = "slip-copy";
+      copy.textContent = "Copy";
+      copy.setAttribute("aria-live", "polite");
+      box.appendChild(pre);
+      box.appendChild(copy);
+    }
+    copyCite(box.querySelector(".slip-copy"));
+  }
+
+  // Copy the entry; if the clipboard is unavailable, select it instead.
+  function copyCite(c) {
+    var pre = c.parentNode.querySelector("pre");
+    function select() {
+      var r = document.createRange();
+      r.selectNodeContents(pre);
+      var s = window.getSelection();
+      s.removeAllRanges();
+      s.addRange(r);
+    }
+    if (!navigator.clipboard) { select(); return; }
+    navigator.clipboard.writeText(pre.textContent).then(function () {
+      c.textContent = "Copied";
+      clearTimeout(c._t);
+      c._t = setTimeout(function () { c.textContent = "Copy"; }, 1800);
+    }, select);
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);

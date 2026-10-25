@@ -2,6 +2,8 @@
   Handwritten notebooks from _data/tangents.yml, newest first. Each numbered
   idea is its own slip of notepaper with a link of its own (/tangents/#I-5)
   and a "write to me about this" that opens an email about that tangent.
+  "Cite this idea" shows a BibTeX entry for it (built by site.js from the
+  data-cite-* attributes, so it only appears when scripts run).
   Tapping a slip opens it full size (it's a vector, so it stays sharp).
 {%- endcomment -%}
 {%- for nb in site.data.tangents %}
@@ -14,7 +16,7 @@
     {%- endif %}
   </p>
   <p class="tap-hint">Tap a slip to read it larger.</p>
-  <ol class="slips">
+  <ol class="slips" data-cite-author="{{ site.author.name }}" data-cite-notebook="{{ nb.title }}" data-cite-date="{{ nb.date }}">
     {%- for h in nb.slips %}
     {%- assign n = forloop.index %}
     {%- assign src = nb.folder | append: '/tangent-' | append: n | append: '.svg' | relative_url %}
@@ -24,8 +26,12 @@
       </a>
       <p class="slip-meta">
         <a class="slip-no" href="#{{ nb.key }}-{{ n }}" aria-label="Link to tangent {{ nb.key }}.{{ n }}">{{ nb.key }}.{{ n }}</a>
-        <a class="slip-write" href="#write" data-subject="Tangent {{ nb.key }}.{{ n }}">Write to me about this</a>
+        <span class="slip-actions">
+          <button class="slip-cite" type="button" aria-expanded="false" aria-controls="cite-{{ nb.key }}-{{ n }}" data-cite-id="{{ nb.key }}-{{ n }}" data-cite-label="{{ nb.key }}.{{ n }}" data-cite-url="{{ page.url | append: '#' | append: nb.key | append: '-' | append: n | absolute_url }}" hidden>Cite this idea</button>
+          <a class="slip-write" href="#write" data-subject="Tangent {{ nb.key }}.{{ n }}">Write to me about this</a>
+        </span>
       </p>
+      <div class="slip-bib" id="cite-{{ nb.key }}-{{ n }}" hidden></div>
     </li>
     {%- endfor %}
   </ol>

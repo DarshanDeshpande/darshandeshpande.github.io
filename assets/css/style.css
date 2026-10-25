@@ -325,7 +325,7 @@ h2 {
   display: grid;
   gap: 2rem;
 }
-.slip { scroll-margin-top: 4.5rem; }                     /* clear the sticky top bar when linked to */
+.slip { scroll-margin-top: 4.5rem; min-width: 0; }       /* clear the sticky top bar when linked to; let a long BibTeX line scroll, not widen the slip */
 .slip-paper {
   display: block;
   cursor: zoom-in;
@@ -352,6 +352,30 @@ h2 {
 .slip-meta a { color: var(--faint); text-decoration: none; }
 .slip-meta a:hover { color: var(--accent); }
 .slip:target .slip-no { color: var(--accent); }
+.slip-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .2rem 1.1rem; }
+.slip-cite, .slip-copy {
+  font: inherit;
+  letter-spacing: inherit;
+  color: var(--faint);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.slip-cite:hover, .slip-cite[aria-expanded="true"], .slip-copy:hover { color: var(--accent); }
+.slip-cite:focus-visible, .slip-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.slip-bib { position: relative; margin-top: .6rem; background: var(--paper); border: 1px solid var(--rule); }
+.slip-bib[hidden] { display: none; }
+.slip-bib pre {
+  margin: 0;
+  padding: .8rem 1rem;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: .7rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.slip-copy { position: absolute; top: .55rem; right: .8rem; font-family: var(--mono); font-size: .66rem; letter-spacing: .03em; }
 .tangents-write { margin-top: 2.8rem; color: var(--ink-soft); scroll-margin-top: 4.5rem; }
 .tangents-write .email { font-family: var(--mono); font-size: .8rem; }
 @media (prefers-reduced-motion: reduce) { .slip-paper { transition: none; } }
@@ -388,6 +412,7 @@ h2 {
   .slips { margin-inline: calc(-1 * var(--sheet-pad) + .35rem); gap: 1.6rem; }
   .slip .slip-paper { transform: rotate(-.25deg); }
   .slip:nth-child(even) .slip-paper { transform: rotate(.25deg); }
+  .slip-bib pre { padding-top: 2rem; }                   /* room for "Copy" above the entry */
 }
 @media (hover: none) and (max-width: 36rem) { .tap-hint { display: block; } }
 
